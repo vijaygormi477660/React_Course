@@ -1,3 +1,4 @@
+
 name: React CI Pipeline
 
 on:
@@ -14,9 +15,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # Step 1: Checkout code
       - name: Checkout code
         uses: actions/checkout@v5
 
+      # Step 2: Setup Node.js
       - name: Setup Node.js
         uses: actions/setup-node@v5
         with:
@@ -24,10 +27,17 @@ jobs:
           cache: npm
           cache-dependency-path: "01.React Basic  Project/package-lock.json"
 
+      # Step 3: Install dependencies
       - name: Install dependencies
         working-directory: "01.React Basic  Project"
         run: npm ci
 
+      # Step 4: Run test cases
+      - name: Run test cases
+        working-directory: "01.React Basic  Project"
+        run: npm test
+
+      # Step 5: Build React project
       - name: Build React project
         working-directory: "01.React Basic  Project"
         run: npm run build
